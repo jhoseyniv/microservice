@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+
+        <title>
+            <th:block th:utext="#{task_management}"/>
+        </title>
+
+</head>
+<body>
+<header th:insert="layout/header.html :: header"> </header>
+
+<p>Go to the next page to see fragments in action</p>
+<div th:replace="layout/footer.html :: footer"></div>
+
+</body>
+</html>

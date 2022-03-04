@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  app:
+    image: 'atm-management-service'
+    build:
+      context: ../../..
+    container_name: atm-management-service
+    ports:
+      - "8184:8100"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/ATM_EMULATOR
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - SPRING_JPA_properties_hibernate_dialect=org.hibernate.dialect.PostgreSQLDialect
+
+  db:
+    image: 'bitnami/postgresql'
+    container_name: postgres-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres

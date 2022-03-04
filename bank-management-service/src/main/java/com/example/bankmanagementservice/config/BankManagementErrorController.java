@@ -1,0 +1,33 @@
+package com.example.bankmanagementservice.config;
+
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+
+@Controller
+public class BankManagementErrorController implements ErrorController {
+
+   // @RequestMapping("/error")
+//    public String handleError() {
+//        //do something like logging
+//        return "error";
+//    }
+    @RequestMapping("/error")
+    @ResponseBody
+    public String handleError(HttpServletRequest request) {
+        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+        Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
+        return String.format("<html><body><h2>This is custom Error Page for ....</h2><div>Status code: <b>%s</b> --- Page not found!!</div>"
+                        + "<div>Exception Message: <b>%s</b></div><body></html>",
+                statusCode, exception==null? "N/A": exception.getMessage());
+    }
+
+
+    public String getErrorPath() {
+        return "/error";
+    }
+
+}
